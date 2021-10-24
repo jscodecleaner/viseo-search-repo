@@ -5,18 +5,18 @@ const authSlice = createSlice({
   initialState: {
     email: '',
     password: '',
-    authCheck: 'false',
+    authCheck: false,
   },
   reducers: {
     loginRequest: (state, action) => {
-      state.email = actions.payload.email
-      state.password = acitons.payload.password
+      state.email = action.payload.email
+      state.password = action.payload.password
       state.authCheck = true
     },
-    logoutRequest: (state, action) => {
+    logoutRequest: (state) => {
       state.email = ''
       state.password = ''
-      authCheck = false
+      state.authCheck = false
     },
   },
 })

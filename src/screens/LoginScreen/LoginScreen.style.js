@@ -12,4 +12,10 @@ export default StyleSheet.create({
     color: '#282c44',
     marginVertical: 30,
   },
+  ValidationText: {
+    color: 'red',
+    fontSize: 10,
+    marginLeft: -145,
+    marginTop: -5,
+  },
 })
