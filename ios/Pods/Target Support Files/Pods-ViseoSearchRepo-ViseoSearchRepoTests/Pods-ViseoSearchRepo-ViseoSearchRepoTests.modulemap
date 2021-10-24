@@ -1,0 +1,6 @@
+module Pods_ViseoSearchRepo_ViseoSearchRepoTests {
+  umbrella header "Pods-ViseoSearchRepo-ViseoSearchRepoTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
