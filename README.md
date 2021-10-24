@@ -48,5 +48,6 @@ o You can show other details if you wish
    - You can go to the repo url on browser by clicking "Go to repo" button.
 
 # Preview Result
-  You can see the result video record via "result_screen.mov" file.
-  https://github.com/jsdevdancer/viseo-search-repo/blob/main/result_screen.mov
+  You can see the result video record via "result_screen.mov" file. 
+   
+  https://github.com/jsdevdancer/viseo-search-repo/blob/main/result_screen.mp4
