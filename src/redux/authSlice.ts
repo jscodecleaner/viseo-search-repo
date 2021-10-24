@@ -1,14 +1,22 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+
+export interface AuthState {
+  email: string,
+  password: string,
+  authCheck: boolean,
+}
+
+const initialState: AuthState = {
+  email: '',
+  password: '',
+  authCheck: false,
+}
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {
-    email: '',
-    password: '',
-    authCheck: false,
-  },
+  initialState,
   reducers: {
-    loginRequest: (state, action) => {
+    loginRequest: (state, action: PayloadAction<{ email: string, password: string }>) => {
       state.email = action.payload.email
       state.password = action.payload.password
       state.authCheck = true

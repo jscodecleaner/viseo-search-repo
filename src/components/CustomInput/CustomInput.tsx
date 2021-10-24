@@ -2,7 +2,14 @@ import React from 'react'
 import { TextInput } from 'react-native'
 import styles from './CustomInput.style'
 
-const CustomInput = (props) => {
+export type Props = {
+  value: string;
+  placeholder: string;
+  security: boolean;
+  onChange: (text: string) => void;
+}
+
+const CustomInput: React.FC<Props> = (props) => {
   return (
     <TextInput
       style={styles.InputBox}

@@ -2,7 +2,12 @@ import React from 'react'
 import { Text, TouchableOpacity } from 'react-native'
 import styles from './CustomButton.style'
 
-const CustomButton = (props) => {
+export type Props = {
+  onClick: () => void;
+  name: string
+}
+
+const CustomButton: React.FC<Props> = (props) => {
   return (
     <TouchableOpacity style={styles.ButtonStyle} onPress={props.onClick}>
       <Text style={styles.ButtonText}>{props.name}</Text>

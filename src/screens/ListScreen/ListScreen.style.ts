@@ -1,9 +1,16 @@
-import { StyleSheet, Dimensions } from 'react-native'
+import { StyleSheet, Dimensions, ViewStyle, TextStyle } from 'react-native'
+
+interface Style {
+  Container: ViewStyle
+  ListContainer: ViewStyle
+  NoData: TextStyle
+  Loading: ViewStyle
+}
 
 const deviceWidth = Dimensions.get('window').width
 const deviceHeight = Dimensions.get('window').height
 
-export default StyleSheet.create({
+export default StyleSheet.create<Style>({
   Container: {
     flex: 1,
     alignItems: 'center',
@@ -19,4 +26,8 @@ export default StyleSheet.create({
     fontSize: 18,
     color: '#282c44',
   },
+  Loading: {
+    justifyContent: 'center',
+    bottom: deviceHeight / 2 - 20
+  }
 })

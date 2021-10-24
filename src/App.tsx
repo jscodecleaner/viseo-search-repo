@@ -19,16 +19,10 @@ const App = () => {
           <Stack.Screen
             name={'LoginScreen'}
             component={LoginScreen}
-            options={{
-              animationEnabled: false,
-            }}
           />
           <Stack.Screen
             name={'ListScreen'}
             component={ListScreen}
-            options={{
-              animationEnabled: false,
-            }}
           />
           <Stack.Screen name={'DetailsScreen'} component={DetailsScreen} />
         </Stack.Navigator>

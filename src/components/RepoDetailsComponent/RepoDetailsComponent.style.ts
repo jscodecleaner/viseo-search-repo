@@ -1,6 +1,18 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
 
-export default StyleSheet.create({
+interface Style {
+  DetailsContainer: ViewStyle
+  LogoContainer: ViewStyle
+  OwnerImage: ImageStyle
+  OwnerName: TextStyle
+  RepoContainer: ViewStyle
+  RepoDetails: TextStyle
+  DetailIcon: ImageStyle
+  DetailName: TextStyle
+  ButtonContainer: ViewStyle
+} 
+
+export default StyleSheet.create<Style>({
   DetailsContainer: {
     width: '100%',
     shadowOffset: { width: 0, height: 2 },
@@ -20,7 +32,6 @@ export default StyleSheet.create({
     resizeMode: 'cover',
     height: 120,
     width: 120,
-    resizeMode: 'contain',
     borderRadius: 75,
     alignItems: 'center',
     justifyContent: 'center',

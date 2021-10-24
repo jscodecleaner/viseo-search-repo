@@ -4,7 +4,12 @@ import { useDispatch } from 'react-redux'
 import { listActions } from '../../redux/listSlice'
 import styles from './ListComponent.style'
 
-const ListComponent = (props) => {
+export type Props = {
+  data: any
+  onClick: () => void;
+}
+
+const ListComponent: React.FC<Props> = (props) => {
   const data = props.data
   const dispatch = useDispatch()
 

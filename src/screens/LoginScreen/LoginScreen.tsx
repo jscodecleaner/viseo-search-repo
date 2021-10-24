@@ -1,46 +1,56 @@
 import React, { useState } from 'react'
 import { View, Text } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
-import { authActions } from './../../redux/authSlice'
+import { authActions } from '../../redux/authSlice'
 import styles from './LoginScreen.style'
 
 /* Import Custom Components */
-import CustomInput from './../../components/CustomInput/CustomInput'
-import CustomButton from './../../components/CustomButton/CustomButton'
+import CustomInput from '../../components/CustomInput/CustomInput'
+import CustomButton from '../../components/CustomButton/CustomButton'
+import CustomLoading from '../../components/CustomLoading/CustomLoading'
 
-const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailValidation, setEmailValidation] = useState(true)
-  const [passwordValidation, setPasswordValidation] = useState(true)
-  const authCheck = useSelector((state) => state.auth.authCheck)
+export type Props = {
+  navigation: any
+}
+
+const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  const [email, setEmail] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
+  const [emailValidation, setEmailValidation] = useState<boolean>(true)
+  const [passwordValidation, setPasswordValidation] = useState<boolean>(true)
+  const authCheck = useSelector((state: any) => state.auth.authCheck)
   const dispatch = useDispatch()
 
-  const handleEmail = (value) => {
+  const handleEmail = (value: string) => {
     setEmail(value)
     setEmailValidation(true)
   }
 
-  const handlePassword = (value) => {
+  const handlePassword = (value: string) => {
     setPassword(value)
     setPasswordValidation(true)
   }
 
   const handleLogin = () => {
+    setLoading(true)
     /* Email validation check */
     if (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)) {
     } else {
       setEmailValidation(false)
+      setLoading(false)
       return
     }
 
     /* Password validation check */
     if (!password.length) {
       setPasswordValidation(false)
+      setLoading(false)
       return
     }
 
-    dispatch(authActions.loginRequest(email, password))
+    dispatch(authActions.loginRequest({email, password}))
+    setLoading(false)
     if (authCheck) navigation.navigate('ListScreen')
   }
 
@@ -50,6 +60,7 @@ const LoginScreen = ({ navigation }) => {
       <CustomInput
         value={email}
         placeholder="Email..."
+        security={false}
         onChange={(text) => handleEmail(text)}
       />
       {!emailValidation && (
@@ -67,6 +78,7 @@ const LoginScreen = ({ navigation }) => {
         </Text>
       )}
       <CustomButton name="Login" onClick={handleLogin} />
+      {loading && <CustomLoading />}
     </View>
   )
 }

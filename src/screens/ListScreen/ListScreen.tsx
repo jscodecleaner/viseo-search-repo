@@ -9,21 +9,27 @@ import styles from './ListScreen.style'
 /* Import Custom Components */
 import CustomInput from '../../components/CustomInput/CustomInput'
 import ListComponent from '../../components/ListComponent/ListComponent'
+import CustomLoading from '../../components/CustomLoading/CustomLoading'
 
-const ListScreen = ({ navigation }) => {
-  const [search, setSearch] = useState('')
+export type Props = {
+  navigation: any
+}
+
+const ListScreen: React.FC<Props> = ({ navigation }) => {
+  const [search, setSearch] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
   const dispatch = useDispatch()
-  const lists = useSelector((state) => state.list.lists)
+  const lists = useSelector((state: any) => state.list.lists)
   const onSearch$ = new Subject()
   const subscription = onSearch$
     .pipe(
-      map((value) => value.trim()),
+      map((value: any) => value.trim()),
       filter((value) => value.length > 2),
-      debounceTime(500),
+      debounceTime(1000),
       distinctUntilChanged()
     )
-    .subscribe((text) => {
-      fetchData(text)
+    .subscribe(() => {
+      fetchData()
     })
 
   useEffect(() => {
@@ -41,49 +47,49 @@ const ListScreen = ({ navigation }) => {
   }, [search])
 
   const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `https://api.github.com/search/repositories?q=${search.trim()}`
-      )
+    setLoading(true)
+    const response = await fetch(
+      `https://api.github.com/search/repositories?q=${search.trim()}`
+    )
 
-      if (!response.ok) {
-        throw new Error('Could not fetch repo data!')
-      }
-
-      const data = await response.json()
-
-      dispatch(
-        listActions.replaceLists({
-          lists: data.items || [],
-        })
-      )
-    } catch (error) {
-      console.log('Fetch Data Error: ', error)
+    if (!response.ok) {
+      setLoading(false)
+      throw new Error('Could not fetch repo data!')
     }
 
+    const data = await response.json()
+
+    dispatch(
+      listActions.replaceLists({
+        lists: data.items || [],
+      })
+    )
+    setLoading(false)
     return data
   }
 
-  const handleClickRepo = (data) => {
-    navigation.navigate('DetailsScreen', { repoData: data })
+  const handleClickRepo = () => {
+    navigation.navigate('DetailsScreen')
   }
 
   return (
     <SafeAreaView style={styles.Container}>
       <CustomInput
         value={search}
+        security={false}
         placeholder="Search repository..."
         onChange={(text) => setSearch(text)}
       />
       <ScrollView style={styles.ListContainer}>
         {lists ? (
-          lists.map((repo, index) => (
+          lists.map((repo: any, index: number) => (
             <ListComponent key={index} data={repo} onClick={handleClickRepo} />
           ))
         ) : (
           <Text style={styles.NoData}>Data not found.</Text>
         )}
       </ScrollView>
+      {loading && <CustomLoading />}
     </SafeAreaView>
   )
 }

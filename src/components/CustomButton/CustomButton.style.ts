@@ -1,6 +1,11 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native'
 
-export default StyleSheet.create({
+interface Style {
+  ButtonStyle: ViewStyle
+  ButtonText: TextStyle
+}
+
+export default StyleSheet.create<Style>({
   ButtonStyle: {
     backgroundColor: '#282c44',
     paddingVertical: 15,

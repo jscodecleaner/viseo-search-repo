@@ -7,13 +7,13 @@ import styles from './RepoDetailsComponent.style'
 import CustomButton from '../CustomButton/CustomButton'
 
 /* Import Icons */
-import repoIcon from './../../assets/images/icon_repo.png'
+import repoIcon from '../../assets/images/icon_repo.png'
 import starIcon from './../../assets/images/icon_star.png'
 import forkIcon from './../../assets/images/icon_fork.png'
 import watchIcon from './../../assets/images/icon_watch.png'
 
 const RepoDetailsComponent = () => {
-  const data = useSelector((state) => state.list.repoData)
+  const data = useSelector((state: any) => state.list.repoData)
 
   const handleGotoRepo = () => {
     Linking.openURL(data.html_url)

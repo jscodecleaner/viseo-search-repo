@@ -1,6 +1,12 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle, TextStyle, ImageStyle } from 'react-native'
 
-export default StyleSheet.create({
+interface Style {
+  ListContainer: ViewStyle
+  OwnerImage: ImageStyle
+  OwnerName: TextStyle
+}
+
+export default StyleSheet.create<Style>({
   ListContainer: {
     width: '100%',
     height: 80,

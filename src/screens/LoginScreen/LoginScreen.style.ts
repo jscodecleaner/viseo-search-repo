@@ -1,6 +1,12 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native'
 
-export default StyleSheet.create({
+interface Style {
+  Container: ViewStyle
+  LoginTitle: TextStyle
+  ValidationText: TextStyle
+}
+
+export default StyleSheet.create<Style>({
   Container: {
     flex: 1,
     alignItems: 'center',
